@@ -1,14 +1,14 @@
-package com.tencent.wxcloudrun;
+package com.geekgame.demo;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.tencent.wxcloudrun.dao"})
-public class WxCloudRunApplication {  
+@MapperScan(basePackages = {"com.geekgame.demo.dao"})
+public class Application {
 
   public static void main(String[] args) {
-    SpringApplication.run(WxCloudRunApplication.class, args);
+    SpringApplication.run(Application.class, args);
   }
 }
