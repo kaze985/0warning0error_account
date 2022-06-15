@@ -58,6 +58,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--shardingsphere start-->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>4.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-namespace</artifactId>
+                <version>4.1.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
