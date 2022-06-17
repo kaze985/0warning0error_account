@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 /**
- * @Author lipengpeng
- * @DATE 2022/6/14
+ * 通用返回模型
  */
+
 public class Result<D> implements Serializable {
     @JsonProperty("isSuccess")
     private boolean success = false;

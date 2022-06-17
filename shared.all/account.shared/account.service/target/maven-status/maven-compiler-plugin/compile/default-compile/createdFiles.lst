@@ -1,2 +1,6 @@
+com\geekgame\demo\service\AccountService.class
+com\geekgame\demo\model\Account.class
+com\geekgame\demo\model\AccountType.class
 com\geekgame\demo\model\Paging.class
 com\geekgame\demo\model\Result.class
+com\geekgame\demo\param\QueryAccountParam.class
