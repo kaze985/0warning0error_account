@@ -9,14 +9,14 @@ import java.util.List;
 @Mapper
 public interface AccountDAO {
 
-    int insert(AccountDO accountDO);
+    int add(AccountDO accountDO);
 
-    int delete(String account);
-
-    int update(AccountDO accountDO);
-
-    AccountDO selectByAccount(String account);
-
-    List<AccountDO> pageQuery(QueryAccountParam param);
+//    int delete(String account);
+//
+//    int update(AccountDO accountDO);
+//
+//    AccountDO selectByAccount(String account);
+//
+//    List<AccountDO> pageQuery(QueryAccountParam param);
 
 }

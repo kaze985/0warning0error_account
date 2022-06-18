@@ -12,15 +12,9 @@
         <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.geekgame.demo.dataobject.AccountDO">
-        insert into `account`
-        values (
-                #{account,jdbcType=VARCHAR},
-                #{accountType,jdbcType=VARCHAR},
-                #{currency,jdbcType=VARCHAR},
-                #{balance,jdbcType=DOUBLE},
-                current_timestamp(),
-                current_timestamp()
-                )
+    <insert id="add" parameterType="com.geekgame.demo.dataobject.AccountDO">
+        insert into account (account, account_type, currency, balance)
+        values (#{account},#{accountType},#{currency},#{balance})
     </insert>
+
 </mapper>

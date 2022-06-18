@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
             return null;
         }
         AccountDO accountDO = new AccountDO(account);
-        int insert = accountDAO.insert(accountDO);
+        int insert = accountDAO.add(accountDO);
         if(insert==1){
             return account;
         }
