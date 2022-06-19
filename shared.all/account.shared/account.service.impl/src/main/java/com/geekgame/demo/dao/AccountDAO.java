@@ -11,12 +11,13 @@ public interface AccountDAO {
 
     int add(AccountDO accountDO);
 
-//    int delete(String account);
-//
-//    int update(AccountDO accountDO);
-//
-//    AccountDO selectByAccount(String account);
-//
-//    List<AccountDO> pageQuery(QueryAccountParam param);
+    int delete(String account);
 
+    int update(AccountDO accountDO);
+
+    AccountDO selectByAccount(String account);
+
+    List<AccountDO> pageQuery(QueryAccountParam param);
+
+    int selectCounts(QueryAccountParam param);
 }

@@ -1,3 +1,5 @@
+com\geekgame\demo\config\DataSourceHealthConfig.class
 com\geekgame\demo\dao\AccountDAO.class
 com\geekgame\demo\service\impl\AccountServiceImpl.class
 com\geekgame\demo\dataobject\AccountDO.class
+com\geekgame\demo\config\TablePreciseShardingAlgorithm.class

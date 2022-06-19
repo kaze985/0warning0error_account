@@ -18,4 +18,12 @@ public class QueryAccountParam extends Paging {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
 }
