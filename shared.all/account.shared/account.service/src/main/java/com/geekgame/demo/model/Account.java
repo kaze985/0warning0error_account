@@ -19,6 +19,10 @@ public class Account implements Serializable {
      */
     private AccountType accountType;
     /**
+     * 账户类型名称
+     */
+    private String accountTypeName;
+    /**
      * 币种
      */
     private String currency;
@@ -83,5 +87,13 @@ public class Account implements Serializable {
 
     public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public String getAccountTypeName() {
+        return accountTypeName;
+    }
+
+    public void setAccountTypeName(String accountTypeName) {
+        this.accountTypeName = accountTypeName;
     }
 }

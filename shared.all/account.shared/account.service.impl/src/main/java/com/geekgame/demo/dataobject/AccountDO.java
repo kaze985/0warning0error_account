@@ -96,6 +96,7 @@ public class AccountDO implements Serializable {
         Account account = new Account();
         BeanUtils.copyProperties(this,account);
         account.setAccountType(AccountType.getAccountType(getAccountType()));
+        account.setAccountTypeName(account.getAccountType().getTypeName());
         return account;
     }
 }
