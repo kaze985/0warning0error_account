@@ -1,6 +1,10 @@
 package com.geekgame.demo.dataobject;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.geekgame.demo.model.Account;
 import com.geekgame.demo.model.AccountType;
 import org.springframework.beans.BeanUtils;
@@ -28,13 +32,20 @@ public class AccountDO implements Serializable {
     /**
      * 开立时间
      */
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtCreated;
     /**
      * 更新时间
      */
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtModified;
 
     public AccountDO() {
+
     }
 
     public AccountDO(Account account){
@@ -95,7 +106,7 @@ public class AccountDO implements Serializable {
     public Account convertToModel(){
         Account account = new Account();
         BeanUtils.copyProperties(this,account);
-        account.setAccountType(AccountType.getAccountType(getAccountType()));
+        account.setAccountType(AccountType.getAccountType(getAccountType()!=null?getAccountType():"04"));
         account.setAccountTypeName(account.getAccountType().getTypeName());
         return account;
     }

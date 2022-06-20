@@ -1,6 +1,7 @@
 package com.geekgame.demo.model;
 
 import org.apache.commons.lang3.StringUtils;
+import org.omg.CORBA.UNKNOWN;
 
 import java.io.Serializable;
 
@@ -11,7 +12,8 @@ import java.io.Serializable;
 public enum AccountType implements Serializable {
     INDIVIDUAL_DEMAND("个人活期","01"),
     INDIVIDUAL_PERIODIC("个人定期","02"),
-    CORPORATE_ACCOUNT("对公户","03");
+    CORPORATE_ACCOUNT("对公户","03"),
+    UNKNOWN("未知","04");
 
     private final String typeName;
     private final String typeVal;

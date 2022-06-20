@@ -9,9 +9,11 @@ import com.geekgame.demo.service.AccountService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +22,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountDAO accountDAO;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public Account add(Account account) {
@@ -55,7 +60,16 @@ public class AccountServiceImpl implements AccountService {
         if(StringUtils.isEmpty(account)){
             return null;
         }
-        return accountDAO.selectByAccount(account).convertToModel();
+        AccountDO accountDO = (AccountDO) redisTemplate.opsForValue().get(account);
+        if (accountDO == null) {
+            accountDO = accountDAO.selectByAccount(account);
+            if(accountDO==null){
+                redisTemplate.opsForValue().set(account,new AccountDO(),5,TimeUnit.MINUTES);
+                return null;
+            }
+            redisTemplate.opsForValue().set(account,accountDO);
+        }
+        return accountDO.convertToModel();
     }
 
     @Override

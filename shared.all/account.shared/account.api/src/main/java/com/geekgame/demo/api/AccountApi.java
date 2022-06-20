@@ -23,6 +23,10 @@ public class AccountApi {
             return result;
         }
         Account accountResult = accountService.add(account);
+        if (accountResult == null) {
+            result.setMessage("add fails");
+            return result;
+        }
         result.setData(accountResult);
         result.setSuccess(true);
         return result;
@@ -66,6 +70,10 @@ public class AccountApi {
             return result;
         }
         Account account = accountService.selectByAccount(accountNumber);
+        if (account == null) {
+            result.setMessage("query fails");
+            return result;
+        }
         result.setSuccess(true);
         result.setData(account);
         return result;
@@ -79,6 +87,10 @@ public class AccountApi {
             return result;
         }
         Paging<Account> accountPaging = accountService.pageQuery(param);
+        if (accountPaging == null) {
+            result.setMessage("query fails");
+            return result;
+        }
         result.setSuccess(true);
         result.setData(accountPaging);
         return result;
