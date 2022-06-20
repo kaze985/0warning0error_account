@@ -88,7 +88,7 @@ public class AccountServiceImpl implements AccountService {
         List<Account> accounts = accountDOS.stream().map(AccountDO::convertToModel).collect(Collectors.toList());
         result.setData(accounts);
         result.setTotalCount(counts);
-        result.setTotalPage(counts/ result.getPageSize());
+        result.setTotalPage((int) Math.ceil(counts * 1.0 / result.getPageSize()));
         return result;
     }
 }
