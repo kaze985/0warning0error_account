@@ -6,11 +6,14 @@ import com.geekgame.demo.model.Account;
 import com.geekgame.demo.model.Paging;
 import com.geekgame.demo.param.QueryAccountParam;
 import com.geekgame.demo.service.AccountService;
+import io.shardingsphere.transaction.annotation.ShardingTransactionType;
+import io.shardingsphere.transaction.api.TransactionType;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -73,6 +76,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account select(String account) {
+        if(StringUtils.isEmpty(account)){
+            return null;
+        }
+        AccountDO accountDO = accountDAO.selectByAccount(account);
+        if (accountDO == null) {
+            return null;
+        }
+        return accountDO.convertToModel();
+    }
+
+    @Override
     public Paging<Account> pageQuery(QueryAccountParam param) {
         Paging<Account> result = new Paging<>();
         if(param==null){
@@ -90,5 +105,17 @@ public class AccountServiceImpl implements AccountService {
         result.setTotalCount(counts);
         result.setTotalPage((int) Math.ceil(counts * 1.0 / result.getPageSize()));
         return result;
+    }
+
+    @Override
+    @ShardingTransactionType(TransactionType.LOCAL)
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateBalance(Account payerAccount, Account payeeAccount) {
+        int i = accountDAO.update(new AccountDO(payerAccount));
+        int j = accountDAO.update(new AccountDO(payeeAccount));
+        if (i==1 && j==1){
+            return true;
+        }
+        return false;
     }
 }

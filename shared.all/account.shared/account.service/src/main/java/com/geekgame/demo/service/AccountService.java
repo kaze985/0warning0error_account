@@ -4,8 +4,6 @@ import com.geekgame.demo.model.Account;
 import com.geekgame.demo.model.Paging;
 import com.geekgame.demo.param.QueryAccountParam;
 
-import java.util.List;
-
 public interface AccountService {
 
     Account add(Account account);
@@ -16,6 +14,10 @@ public interface AccountService {
 
     Account selectByAccount(String account);
 
+    Account select(String account);
+
     Paging<Account> pageQuery(QueryAccountParam param);
+
+     boolean updateBalance(Account payerAccount,Account payeeAccount);
 
 }

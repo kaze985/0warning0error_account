@@ -89,7 +89,12 @@
                 <artifactId>sharding-core-common</artifactId>
                 <version>${sharding-sphere.version}</version>
             </dependency>
-
+            <!--依赖sharding-->
+            <dependency>
+                <groupId>io.shardingsphere</groupId>
+                <artifactId>sharding-transaction-spring-boot-starter</artifactId>
+                <version>3.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
