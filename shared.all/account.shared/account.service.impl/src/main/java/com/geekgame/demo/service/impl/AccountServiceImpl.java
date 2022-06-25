@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
-    private AccountDAO accountDAO;
+    private  AccountDAO accountDAO;
 
     @Autowired
     private RedisTemplate redisTemplate;
 
     @Override
-    public Account add(Account account) {
+    public  Account add(Account account) {
         if(account==null){
             return null;
         }
@@ -102,6 +102,8 @@ public class AccountServiceImpl implements AccountService {
         List<AccountDO> accountDOS = accountDAO.pageQuery(param);
         List<Account> accounts = accountDOS.stream().map(AccountDO::convertToModel).collect(Collectors.toList());
         result.setData(accounts);
+        result.setPageNum(param.getPageNum());
+        result.setPageSize(param.getPageSize());
         result.setTotalCount(counts);
         result.setTotalPage((int) Math.ceil(counts * 1.0 / result.getPageSize()));
         return result;
@@ -118,4 +120,5 @@ public class AccountServiceImpl implements AccountService {
         }
         return false;
     }
+
 }
