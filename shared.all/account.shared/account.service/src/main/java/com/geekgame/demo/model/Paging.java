@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 分页模型
+ * 通用分页模型
  */
+
 public class Paging<R> implements Serializable {
 
     private static final long serialVersionUID = 522660448543880825L;

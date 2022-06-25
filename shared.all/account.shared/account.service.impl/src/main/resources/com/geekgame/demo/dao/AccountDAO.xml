@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geekgame.demo.dao.AccountDAO">
+
+    <resultMap id="accountResultMap" type="com.geekgame.demo.dataobject.AccountDO">
+        <id column="account" property="account"/>
+        <result column="account_type" property="accountType"/>
+        <result column="currency" property="currency"/>
+        <result column="balance" property="balance"/>
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.geekgame.demo.dataobject.AccountDO">
+        insert into `account` (account, account_type, currency, balance)
+        values (#{account},#{accountType},#{currency},#{balance})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from `account`
+        where account=#{account}
+    </delete>
+
+    <update id="update" parameterType="com.geekgame.demo.dataobject.AccountDO">
+        update `account`
+        <set>
+            <if test="balance != null">
+                balance=#{balance},
+            </if>
+            gmt_modified = current_timestamp()
+        </set>
+        <where>
+            <if test="account != '' and account != null">
+                account=#{account}
+            </if>
+        </where>
+    </update>
+
+    <select id="selectByAccount" parameterType="java.lang.String" resultMap="accountResultMap">
+        select account, account_type, currency, balance, gmt_created, gmt_modified
+        from `account`
+        <where>
+            <if test="account != null">
+                account=#{account}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCounts" resultType="java.lang.Integer" parameterType="com.geekgame.demo.param.QueryAccountParam">
+        select count(*)
+        from `account`
+        <where>
+            <if test="startTime != null">
+                AND gmt_created <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND gmt_created <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="pageQuery" parameterType="com.geekgame.demo.param.QueryAccountParam" resultMap="accountResultMap">
+        select account, account_type, currency, balance, gmt_created, gmt_modified
+        from `account`
+        <where>
+            <if test="startTime != null">
+                AND gmt_created <![CDATA[ >= ]]> #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND gmt_created <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </where>
+        <bind name="currentIndex" value="(pageNum - 1)* pageSize"/>
+        limit #{currentIndex},#{pageSize}
+    </select>
+
+</mapper>
