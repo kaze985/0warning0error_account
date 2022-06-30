@@ -18,6 +18,6 @@ public interface AccountService {
 
     Paging<Account> pageQuery(QueryAccountParam param);
 
-     boolean updateBalance(Account payerAccount,Account payeeAccount);
+     //boolean updateBalance(Account payerAccount,Account payeeAccount);
 
 }
