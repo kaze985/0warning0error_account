@@ -18,10 +18,7 @@
       <module name="account.api" options="-parameters" />
       <module name="account.service" options="-parameters" />
       <module name="account.service.impl" options="-parameters" />
-      <module name="account.shared" options="-parameters" />
-      <module name="app.all" options="-parameters" />
       <module name="application" options="-parameters" />
-      <module name="shared.all" options="-parameters" />
     </option>
   </component>
 </project>

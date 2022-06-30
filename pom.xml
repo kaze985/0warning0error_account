@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
+        <version>2.3.12.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.geekgame</groupId>
@@ -20,8 +20,8 @@
     <description>demo project for geekgame</description>
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
-        <sharding-sphere.version>4.0.0-RC1</sharding-sphere.version>
+        <spring-cloud-alibaba.version>2.2.8.RELEASE</spring-cloud-alibaba.version>
+        <sharding-sphere.version>4.1.1</sharding-sphere.version>
     </properties>
     <dependencies>
         <dependency>
@@ -63,7 +63,7 @@
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
+                <artifactId>druid</artifactId>
                 <version>1.1.23</version>
             </dependency>
             <dependency>
@@ -84,17 +84,13 @@
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>${sharding-sphere.version}</version>
             </dependency>
+            <!-- 使用BASE事务时，需要引入此模块 -->
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
-                <artifactId>sharding-core-common</artifactId>
+                <artifactId>sharding-transaction-base-seata-at</artifactId>
                 <version>${sharding-sphere.version}</version>
             </dependency>
-            <!--依赖sharding-->
-            <dependency>
-                <groupId>io.shardingsphere</groupId>
-                <artifactId>sharding-transaction-spring-boot-starter</artifactId>
-                <version>3.1.0</version>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

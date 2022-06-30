@@ -13,8 +13,8 @@
     </resultMap>
 
     <insert id="add" parameterType="com.geekgame.demo.dataobject.AccountDO">
-        insert into `account` (account, account_type, currency, balance)
-        values (#{account},#{accountType},#{currency},#{balance})
+        insert into `account` (account, account_type, currency, balance, gmt_created, gmt_modified)
+        values (#{account},#{accountType},#{currency},#{balance},now(),now())
     </insert>
 
     <delete id="delete" parameterType="java.lang.String">
@@ -23,12 +23,12 @@
     </delete>
 
     <update id="update" parameterType="com.geekgame.demo.dataobject.AccountDO">
-        update `account`
+        update account
         <set>
             <if test="balance != null">
                 balance=#{balance},
             </if>
-            gmt_modified = current_timestamp()
+            gmt_modified = now()
         </set>
         <where>
             <if test="account != '' and account != null">
