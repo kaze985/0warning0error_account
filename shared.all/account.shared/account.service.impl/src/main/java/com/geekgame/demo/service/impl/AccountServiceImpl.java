@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -54,6 +55,12 @@ public class AccountServiceImpl implements AccountService {
         if (account == null) {
             return 0;
         }
+        AccountDO accountDO = (AccountDO) redisTemplate.opsForValue().get(account.getAccount());
+        if (accountDO != null) {
+            accountDO.setGmtModified(LocalDateTime.now());
+            accountDO.setBalance(account.getBalance());
+            redisTemplate.opsForValue().set(account.getAccount(),accountDO,1,TimeUnit.DAYS);
+        }
         return accountDAO.update(new AccountDO(account));
     }
 
@@ -69,19 +76,7 @@ public class AccountServiceImpl implements AccountService {
                 redisTemplate.opsForValue().set(account,new AccountDO(),5,TimeUnit.MINUTES);
                 return null;
             }
-            redisTemplate.opsForValue().set(account,accountDO);
-        }
-        return accountDO.convertToModel();
-    }
-
-    @Override
-    public Account select(String account) {
-        if(StringUtils.isEmpty(account)){
-            return null;
-        }
-        AccountDO accountDO = accountDAO.selectByAccount(account);
-        if (accountDO == null) {
-            return null;
+            redisTemplate.opsForValue().set(account,accountDO,1,TimeUnit.DAYS);
         }
         return accountDO.convertToModel();
     }

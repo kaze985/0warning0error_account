@@ -14,10 +14,6 @@ public interface AccountService {
 
     Account selectByAccount(String account);
 
-    Account select(String account);
-
     Paging<Account> pageQuery(QueryAccountParam param);
-
-     //boolean updateBalance(Account payerAccount,Account payeeAccount);
 
 }
