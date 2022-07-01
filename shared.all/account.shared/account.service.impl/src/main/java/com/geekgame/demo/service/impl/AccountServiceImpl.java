@@ -82,6 +82,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account select(String account) {
+        if(StringUtils.isEmpty(account)){
+            return null;
+        }
+        AccountDO accountDO = accountDAO.selectByAccount(account);
+        if (accountDO == null) {
+            return null;
+        }
+        return accountDO.convertToModel();
+    }
+
+    @Override
     public Paging<Account> pageQuery(QueryAccountParam param) {
         Paging<Account> result = new Paging<>();
         if(param==null){
